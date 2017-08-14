@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<p>Click the "Process" button to replace the keywords:</p>
+
+<textarea rows="4" cols="50" name="comment" form="IO" id="IO" placeholder="Enter text here...">
+</textarea>
+
+<textarea rows="4" cols="50" name="comment" form="from" id="from" placeholder="Enter FROM keywords here">
+</textarea>
+
+<textarea rows="4" cols="50" name="comment" form="to" id="to" placeholder="Enter TO keywords here">
+</textarea>
+
+<br>
+<button onclick="process()">Process</button>
+
+<br><br>
+<p><strong>Note:</strong> The FROM and TO keywords are keys separated by comma</p>
+
+<script>
+function process() {
+	var str = document.getElementById("IO").value;
+	var from = document.getElementById("from").value
+	var arrayFrom = from.split(',');
+	var to = document.getElementById("to").value
+	var arrayTo = to.split(',');
+	var finalAns = str;
+for (var i = arrayFrom.length - 1; i >= 0; i--) {
+    finalAns = finalAns.replace(RegExp("\\b" + arrayFrom[i].replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&') + "\\b", "g"), arrayTo[i]);
+}
+document.getElementById("IO").value = finalAns;
+}
+
+</script>
+
+</body>
+</html>
